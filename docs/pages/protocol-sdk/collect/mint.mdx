@@ -1,0 +1,162 @@
+# Mint 1155s, 721s, and Premints
+
+The Collector Client can be used to prepare transactions for minting 1155s, 721s, and premints with
+a function `mint()`. The type of item to mint is determined by the `mintType` parameter, which
+can be set to either `1155`, `721`, or `premint`. Depending on the `mintType` additional parameters
+must be passed.
+
+```tsx twoslash
+import { 
+  useChainId, 
+  usePublicClient, 
+  useWriteContract } from 'wagmi';
+import { createCollectorClient } from "@zoralabs/protocol-sdk";
+
+const chainId = useChainId();
+const publicClient = usePublicClient();
+
+// set to the chain you want to interact with
+const collectorClient = createCollectorClient({ chainId, publicClient });
+
+const { parameters } = await collectorClient.mint({
+  // collection address to mint
+  tokenContract: "0x1234567890123456789012345678901234567890",
+  // quantity of tokens to mint
+  quantityToMint: 5,
+  // can be set to 1155, 721, or premint
+// @noErrors
+  mintType: "",
+  //         ^|
+});
+
+
+const { writeContract } = useWriteContract();
+
+//Clicking the button writes the mint transaction to the network
+<button onClick={() => writeContract(parameters)}>Create</button>
+```
+
+### Mint Premints
+
+Once a Premint has been created and submitted to the Zora Premint API, it can be collected by calling `mint()` with `mintType` set to `premint`, and the `uid` set to the premint's uid:
+
+:::code-group
+
+```ts twoslash [example.ts]
+// @filename: createPremint.ts
+// [!include ~/snippets/protocol-sdk/collect/createPremint.ts]
+
+// @filename: example.ts
+// ---cut---
+// [!include ~/snippets/protocol-sdk/collect/mintPremint.ts]
+```
+
+```ts twoslash [createPremint.ts]
+// @filename: createPremint.ts
+// ---cut---
+// [!include ~/snippets/protocol-sdk/collect/createPremint.ts]
+```
+
+:::
+
+### Mint 1155s
+
+1155s can be minted by calling `mint()` with `mintType` set to `1155`, and the `tokenId` set to the token id to mint:
+
+:::code-group
+
+```ts twoslash [example.ts]
+// @filename: config.ts
+// [!include ~/snippets/protocol-sdk/collect/config.ts]
+
+// @filename: data.ts
+// [!include ~/snippets/protocol-sdk/collect/data.ts]
+
+// @filename: example.ts
+// ---cut---
+// [!include ~/snippets/protocol-sdk/collect/mint1155.ts]
+```
+
+```ts twoslash [data.ts]
+// [!include ~/snippets/protocol-sdk/collect/data.ts]
+```
+
+```ts twoslash [config.ts]
+// [!include ~/snippets/protocol-sdk/collect/config.ts]
+```
+
+:::
+
+### Mint ERC20 based 1155s
+
+When minting ERC20 based 1155s, an additional approval to transfer ERC20s to an address must be executed before minting.  
+In the case that the 1155 to mint is an ERC20 based mint, the `mint` function will return an `erc20Approval` which contains
+information about which ERC20 token to approve, the amount to approve, and the address to approve to.  
+Before executing the mint transaction, the approval transaction must be executed: 
+
+:::code-group
+
+```ts twoslash [example.ts]
+// @filename: config.ts
+// [!include ~/snippets/protocol-sdk/collect/config.ts]
+
+// @filename: example.ts
+// ---cut---
+// [!include ~/snippets/protocol-sdk/collect/minterc20.ts]
+```
+
+```ts twoslash [config.ts]
+// [!include ~/snippets/protocol-sdk/collect/config.ts]
+```
+
+:::
+
+### Mint 721s
+
+721s can be minted by calling `mint()` with `mintType` set to `721`. No `tokenId` is set as the token id is determined by auto-incrementing token ids; one tokenId will be created & minted for each `quantityToMint`:
+
+:::code-group
+
+```ts twoslash [example.ts]
+// @filename: config.ts
+// [!include ~/snippets/protocol-sdk/collect/config.ts]
+
+// @filename: data.ts
+// [!include ~/snippets/protocol-sdk/collect/data.ts]
+
+// @filename: example.ts
+// ---cut---
+// [!include ~/snippets/protocol-sdk/collect/mint721.ts]
+```
+
+```ts twoslash [data.ts]
+// [!include ~/snippets/protocol-sdk/collect/data.ts]
+```
+
+```ts twoslash [config.ts]
+// [!include ~/snippets/protocol-sdk/collect/config.ts]
+```
+
+:::
+
+### Earning Mint Referral Rewards
+
+To earn a mint referral reward, pass in the `mintReferral` argument to the `mint` function:
+
+
+:::code-group
+
+```ts twoslash [example.ts]
+// @filename: createPremint.ts
+// [!include ~/snippets/protocol-sdk/collect/createPremint.ts]
+
+// @filename: example.ts
+// ---cut---
+// [!include ~/snippets/protocol-sdk/collect/mintReferral.ts]
+```
+
+```ts twoslash [createPremint.ts]
+// [!include ~/snippets/protocol-sdk/collect/createPremint.ts]
+```
+
+:::

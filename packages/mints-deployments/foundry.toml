@@ -1,0 +1,31 @@
+[profile.default]
+fs_permissions = [
+  { access = "readwrite", path = "./addresses" },
+  { access = "read", path = "./chainConfigs" },
+  { access = "read", path = "./package.json" },
+  { access = "readwrite", path = "./deterministicConfig" },
+]
+libs = ['node_modules', 'script']
+allow_paths = [
+  "node_modules/@zoralabs/mints-contracts",
+]
+auto_detect_solc = true
+fuzz_runs = 500
+optimizer = true
+optimizer_runs = 500000
+out = 'out'
+script = 'script'
+src = 'src'
+solc_version = '0.8.20'
+via_ir = true
+
+[profile.dev]
+optimizer = false
+optimizer_runs = 0
+via_ir = false
+
+[rpc_endpoints]
+
+arbitrum_sepolia = "https://arb-sepolia.g.alchemy.com/v2/sPspn9ROWxGiJ4VkOpn5ANswui8P4355"
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config

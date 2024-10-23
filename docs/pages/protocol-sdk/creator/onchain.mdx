@@ -1,0 +1,80 @@
+# Create Onchain 1155 Contracts & Tokens
+
+The Protocol SDK can be used to prepare transactions to create 1155 contracts and tokens, using the Creator Client.
+
+### Setup/Create the Creator Client
+
+Initialize a Creator Client with a chain id and `PublicClient`. The chain is used to determine the network to interact with.
+
+```ts twoslash
+import { createCreatorClient } from "@zoralabs/protocol-sdk";
+import { createPublicClient, http } from 'viem';
+import { zora } from "viem/chains";
+
+const publicClient = createPublicClient({ 
+  chain: zora, 
+  transport: http() 
+});
+
+const creatorClient = createCreatorClient({ chainId: zora.id, publicClient });
+```
+
+### Creating a new 1155 contract and token
+
+The function `create1155` is used to create a new 1155 contract and/or token.
+The `contract` argument can be either contract creation parameters or a contract uri.
+
+If `contract` is set to be contract creation parameters, an 1155 contract is either created or retrieved
+at a deterministic address based on those parameters, and the token is created on that contract.
+
+:::code-group
+
+```ts twoslash [example.ts]
+// @filename: config.ts
+// [!include ~/snippets/protocol-sdk/create/config.ts]
+
+// @filename: example.ts
+// ---cut---
+// [!include ~/snippets/protocol-sdk/create/createNew1155ContractOrToken.ts]
+```
+
+```ts twoslash [config.ts]
+// [!include ~/snippets/protocol-sdk/create/config.ts]
+```
+
+:::
+
+### Creating a token on an existing 1155 contract
+
+If `contract` is set to be a contract uri, the token is created on that existing contract.
+
+:::code-group
+
+```ts twoslash [example.ts]
+// @filename: config.ts
+// [!include ~/snippets/protocol-sdk/create/config.ts]
+
+// @filename: createNewContract.ts
+// [!include ~/snippets/protocol-sdk/create/createNewContract.ts]
+
+// @filename: example.ts
+// ---cut---
+// [!include ~/snippets/protocol-sdk/create/createNew1155Token.ts]
+```
+
+```ts twoslash [createNewContract.ts]
+// @filename: config.ts
+// [!include ~/snippets/protocol-sdk/create/config.ts]
+
+// @filename: createNewContract.ts
+// ---cut---
+// [!include ~/snippets/protocol-sdk/create/createNewContract.ts]
+```
+
+```ts twoslash [config.ts] filename="config.ts"
+// [!include ~/snippets/protocol-sdk/create/config.ts]
+```
+
+:::
+
+

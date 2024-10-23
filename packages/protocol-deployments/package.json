@@ -1,0 +1,35 @@
+{
+  "name": "cc-protocol-deployments",
+  "version": "0.1.15",
+  "repository": "",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "yarn bundle-configs && tsup",
+    "bundle-configs": "tsx scripts/bundle-configs.ts && yarn prettier",
+    "prettier": "prettier --write 'src/**/*.ts' 'scripts/*'",
+    "lint": "prettier --check 'src/**/*.ts' 'scripts/*'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@lavamoat/preinstall-always-fail": "2.0.0",
+    "@types/node": "^20.1.2",
+    "es-main": "^1.2.0",
+    "tsup": "^7.2.0",
+    "tsx": "^3.13.0",
+    "typescript": "^5.2.2",
+    "viem": "^2.11.1",
+    "zoralabs-tsconfig": "*"
+  }
+}

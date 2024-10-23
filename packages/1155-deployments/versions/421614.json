@@ -1,0 +1,10 @@
+{
+  "deployedVersions": [],
+  "targetVersion": {
+    "version": "2.10.1",
+    "contractImplAddress": "0x55B53DBE22859d538E3b44DD06C9FAE292409E3c"
+  },
+  "missingUpgradePaths": [],
+  "missingUpgradePathTargets": [],
+  "missingUpgradePathCalls": []
+}
