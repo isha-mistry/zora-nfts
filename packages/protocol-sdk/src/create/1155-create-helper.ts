@@ -2,7 +2,7 @@ import {
   zoraCreator1155FactoryImplABI,
   zoraCreator1155FactoryImplAddress,
   zoraCreator1155ImplABI,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import type {
   Account,
   Address,

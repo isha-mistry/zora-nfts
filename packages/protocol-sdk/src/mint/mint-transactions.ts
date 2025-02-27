@@ -9,7 +9,7 @@ import {
 import {
   erc20MinterABI,
   zoraCreator1155ImplABI,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { zora721Abi, zora1155LegacyAbi } from "src/constants";
 import {
   GenericTokenIdTypes,

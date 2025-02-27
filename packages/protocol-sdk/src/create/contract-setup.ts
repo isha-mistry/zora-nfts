@@ -5,7 +5,7 @@ import {
   zoraCreator1155FactoryImplABI,
   zoraCreator1155FactoryImplAddress,
   zoraCreator1155ImplABI,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 
 type contracts1155Address = keyof typeof contracts1155.addresses;
 function new1155ContractVersion(chainId: number): string {

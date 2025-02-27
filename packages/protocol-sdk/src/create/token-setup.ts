@@ -4,7 +4,7 @@ import {
   zoraCreator1155ImplABI,
   zoraCreatorFixedPriceSaleStrategyABI,
   zoraCreatorFixedPriceSaleStrategyAddress,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { Address, encodeFunctionData, zeroAddress, Hex } from "viem";
 import * as semver from "semver";
 import {

@@ -2,7 +2,7 @@ import {
   iUnwrapAndForwardActionABI,
   mintsEthUnwrapperAndCallerAddress,
   zoraMints1155Config,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { Account, Address, Hex, encodeFunctionData } from "viem";
 import { makePermitTransferBatchAndTypeData } from "./mints-contracts";
 

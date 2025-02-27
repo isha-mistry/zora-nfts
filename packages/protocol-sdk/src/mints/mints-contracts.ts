@@ -5,12 +5,12 @@ import {
   zoraMintsManagerImplABI,
   zoraMintsManagerImplAddress,
   zoraMintsManagerImplConfig,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { AbiParametersToPrimitiveTypes, ExtractAbiFunction } from "abitype";
 import {
   PremintMintArguments,
   PremintConfigV2,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { ContractCreationConfig } from "src/preminter";
 import { makeContractParameters } from "src/utils";
 import {

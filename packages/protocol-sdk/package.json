@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "cc-protocol-deployments": "^0.1.15",
+    "chora-protocol-deployments": "^0.1.13",
     "semver": "^7.6.2"
   },
   "peerDependencies": {

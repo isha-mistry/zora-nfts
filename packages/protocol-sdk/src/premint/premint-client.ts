@@ -13,7 +13,7 @@ import {
   TokenConfigWithVersion,
   encodePremintConfig,
   zoraCreator1155PremintExecutorImplABI,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import {
   getPremintCollectionAddress,
   isAuthorizedToCreatePremint,
@@ -38,7 +38,7 @@ import {
   PremintConfigWithVersion,
   PremintMintArguments,
   premintTypedDataDefinition,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { IPremintAPI, IPremintGetter } from "./premint-api-client";
 import type { DecodeEventLogReturnType } from "viem";
 import { OPEN_EDITION_MINT_SIZE } from "../constants";

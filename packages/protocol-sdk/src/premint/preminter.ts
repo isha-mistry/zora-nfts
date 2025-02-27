@@ -8,7 +8,7 @@ import {
   premintTypedDataDefinition,
   ContractCreationConfig,
   PremintConfigForVersion,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import {
   recoverTypedDataAddress,
   Hex,
@@ -28,7 +28,7 @@ import {
   PremintConfigVersion,
   PremintConfigWithVersion,
   TokenCreationConfig,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { PublicClient } from "src/utils";
 import {
   ContractCreationConfigAndAddress,

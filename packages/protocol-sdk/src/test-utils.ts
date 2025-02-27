@@ -1,7 +1,7 @@
 import {
   zoraCreator1155FactoryImplABI,
   zoraCreator1155FactoryImplAddress,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import {
   Address,
   Hex,

@@ -13,7 +13,7 @@ import { PermitSafeTransferBatch } from "./mints-contracts";
 import {
   mintsEthUnwrapperAndCallerABI,
   mintsEthUnwrapperAndCallerAddress,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { makeCallWithEthSafeTransferData } from "./mints-eth-unwrapper-and-caller";
 
 type RelayCallBody =

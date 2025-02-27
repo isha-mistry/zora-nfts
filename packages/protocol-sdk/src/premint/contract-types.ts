@@ -1,7 +1,7 @@
 import {
   ContractCreationConfig,
   PremintConfigVersion as PremintConfigVersionOrig,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { Address } from "viem";
 
 export enum PremintConfigVersion {

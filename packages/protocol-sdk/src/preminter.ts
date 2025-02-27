@@ -3,7 +3,7 @@ import { ExtractAbiFunction, AbiParametersToPrimitiveTypes } from "abitype";
 import {
   zoraCreator1155PremintExecutorImplABI as preminterAbi,
   zoraCreator1155PremintExecutorImplAddress,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import {
   TypedDataDefinition,
   recoverTypedDataAddress,

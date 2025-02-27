@@ -8,7 +8,7 @@ import { getApiNetworkConfigForChain } from "src/mint/subgraph-mint-getter";
 import {
   PremintConfigVersion,
   PremintConfigWithVersion,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import { Address, Hex } from "viem";
 import {
   PremintCollectionFromApi,

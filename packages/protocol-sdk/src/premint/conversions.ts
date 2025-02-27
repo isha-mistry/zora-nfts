@@ -8,7 +8,7 @@ import {
   PremintConfigV2,
   PremintConfigVersion,
   PremintConfigWithVersion,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import {
   PremintSignatureGetOfCollectionResponse,
   PremintSignatureGetResponse,
