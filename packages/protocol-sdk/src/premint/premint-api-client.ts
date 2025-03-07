@@ -15,7 +15,7 @@ import {
   PremintFromApi,
   PremintSignatureRequestBody,
   PremintSignatureResponse,
-  convertGetPremintApiResponse,
+  // convertGetPremintApiResponse,
   convertGetPremintOfCollectionApiResponse,
   encodePostSignatureInput,
 } from "./conversions";
@@ -43,14 +43,36 @@ export type PremintCollection = PremintSignatureGetResponse["collection"];
 export type BackendChainNames = components["schemas"]["ChainName"];
 
 const postSignature = async ({
-  httpClient: { post, retries } = defaultHttpClient,
+  // httpClient: { post, retries } = defaultHttpClient,
   ...data
 }: PremintSignatureRequestBody & {
   httpClient?: Pick<IHttpClient, "retries" | "post">;
 }): Promise<PremintSignatureResponse> =>
-  retries(() =>
-    post<PremintSignatureResponse>(`${ZORA_API_BASE}premint/signature`, data),
-  );
+  {
+    // Log the request data
+    // try {
+        /* @ts-ignore */
+        const response : PremintSignatureResponse = await fetch('http://localhost:3003/api/data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+    // }catch (e){
+    //   console.log("Error: ", e)
+    // }
+    
+    // await retries(() =>
+    //   post<PremintSignatureResponse>(`${ZORA_API_BASE}premint/signature`, data)
+    // );
+    
+    // // Log the response
+    // console.log('POST Response:', response);
+    
+    return response;
+  }
 
 const getNextUID = async ({
   chainId,
@@ -60,31 +82,62 @@ const getNextUID = async ({
   chainId: number;
   httpClient?: Pick<IHttpClient, "retries" | "get">;
 }): Promise<PremintNextUIDGetResponse> =>
-  retries(() =>
+  {
+    const data= {
+      collection_address: collection_address,
+      chainId: chainId
+    }
+  
+    await fetch('http://localhost:3003/api/data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    const response = retries(() =>
     get<PremintNextUIDGetResponse>(
       `${ZORA_API_BASE}premint/signature/${
         getApiNetworkConfigForChain(chainId).zoraBackendChainName
       }/${collection_address}/next_uid`,
     ),
-  );
+  )
+  return response
+};
 
 export const getSignature = async ({
   collectionAddress,
   uid,
   chainId,
-  httpClient: { retries, get } = defaultHttpClient,
+  // httpClient: { retries, get } = defaultHttpClient,
 }: {
   collectionAddress: Address;
   uid: number;
   chainId: number;
   httpClient?: Pick<IHttpClient, "retries" | "get">;
 }): Promise<PremintFromApi> => {
-  const chainName = getApiNetworkConfigForChain(chainId).zoraBackendChainName;
-  const result = await retries(() =>
-    get<PremintSignatureGetResponse>(
-      `${ZORA_API_BASE}premint/signature/${chainName}/${collectionAddress.toLowerCase()}/${uid}`,
-    ),
-  );
+
+  const data= {
+    collectionAddress: collectionAddress,
+    uid: uid, chainId: chainId, 
+    premintConfigVersion: PremintConfigVersion.V2,
+  }
+
+  await fetch('http://localhost:3003/api/data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  });
+
+  // const chainName = getApiNetworkConfigForChain(chainId).zoraBackendChainName;
+  // const result = await retries(() =>
+  //   get<PremintSignatureGetResponse>(
+  //     `${ZORA_API_BASE}premint/signature/${chainName}/${collectionAddress.toLowerCase()}/${uid}`,
+  //   ),
+  // );
 
   return convertGetPremintApiResponse(result);
 };

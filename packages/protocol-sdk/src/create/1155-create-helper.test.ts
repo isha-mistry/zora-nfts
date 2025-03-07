@@ -2,7 +2,7 @@ import { describe, expect } from "vitest";
 import { getTokenIdFromCreateReceipt } from "./1155-create-helper";
 import { anvilTest } from "src/anvil";
 import { createCreatorClient } from "src/sdk";
-import { zoraCreator1155ImplABI } from "cc-protocol-deployments";
+import { zoraCreator1155ImplABI } from "chora-protocol-deployments";
 import { waitForSuccess } from "src/test-utils";
 import { parseEther } from "viem";
 import {

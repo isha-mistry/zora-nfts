@@ -13,7 +13,7 @@ import {
   zoraMintsManagerImplAddress,
   PremintMintArguments,
   premintTypedDataDefinition,
-} from "cc-protocol-deployments";
+} from "chora-protocol-deployments";
 import {
   Address,
   BaseError,

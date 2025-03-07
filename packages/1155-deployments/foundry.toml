@@ -8,6 +8,7 @@ fs_permissions = [
   { access = "read", path = "../mints-deployments/addresses" },
   { access = "readwrite", path = "./deterministicConfig" },
 ]
+
 libs = ['_imagine', 'node_modules', 'script']
 allow_paths = [
   "node_modules/@zoralabs/protocol-rewards",
@@ -19,6 +20,9 @@ via_ir = true
 solc_version = '0.8.17'
 out = 'out'
 src = 'src'
+libraries = [
+  "node_modules/@zoralabs/zora-1155-contracts/src/delegation/ZoraCreator1155Attribution.sol:DelegatedTokenCreation:0x8d86a458986152B33714481a8600D7C2b7009f48"
+]
 
 [profile.dev]
 optimizer = false
