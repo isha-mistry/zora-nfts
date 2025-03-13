@@ -2,6 +2,7 @@
 pragma solidity 0.8.17;
 
 import "forge-std/Test.sol";
+import "forge-std/console.sol";
 import {Zora1155FactoryFixtures} from "../fixtures/Zora1155FactoryFixtures.sol";
 import {ProtocolRewards} from "@zoralabs/protocol-rewards/src/ProtocolRewards.sol";
 
@@ -72,9 +73,10 @@ contract ZoraCreator1155PreminterTest is Test {
     function setUp() external {
         (creator, creatorPrivateKey) = makeAddrAndKey("creator");
         zora = makeAddr("zora");
-        premintExecutor = makeAddr("premintExecutor");
+        // premintExecutor = makeAddr("premintExecutor");
         collector = makeAddr("collector");
         firstMinter = collector;
+        premintExecutor = collector;
 
         vm.startPrank(zora);
         (rewards, , , factoryProxy, ) = Zora1155FactoryFixtures.setup1155AndFactoryProxy(
@@ -133,6 +135,32 @@ contract ZoraCreator1155PreminterTest is Test {
 
         uint256 quantityToMint = 2;
         uint256 mintCost = (mintFeeAmount + premintConfig.tokenConfig.pricePerToken) * quantityToMint;
+
+        console.log("mintCost", mintCost);
+        console.log("contractConfig.contractAdmin", contractConfig.contractAdmin);
+        console.log("contractConfig.contractName", contractConfig.contractName);
+        console.log("contractConfig.contractURI", contractConfig.contractURI);
+        console.logBytes(signature);
+
+        console.log("********************");
+        console.log("premintExecutor", premintExecutor);
+        console.log("premintConfig.tokenConfig.pricePerToken", premintConfig.tokenConfig.pricePerToken);
+        console.log("premintConfig.tokenConfig.createReferral", premintConfig.tokenConfig.createReferral);
+        console.log("premintConfig.tokenConfig.tokenURI", premintConfig.tokenConfig.tokenURI);
+        console.log("premintConfig.tokenConfig.royaltyBps", premintConfig.tokenConfig.royaltyBPS);
+        console.log("premintConfig.tokenConfig.maxSupply", premintConfig.tokenConfig.maxSupply);
+        console.log("premintConfig.tokenConfig.mintStart", premintConfig.tokenConfig.mintStart);
+        console.log("premintConfig.tokenConfig.payoutRecipient", premintConfig.tokenConfig.payoutRecipient);
+        console.log("premintConfig.tokenConfig.fixedPriceMinter", premintConfig.tokenConfig.fixedPriceMinter);
+        console.log("premintConfig.tokenConfig.mintDuration", premintConfig.tokenConfig.mintDuration);
+        console.log("premintConfig.tokenConfig.maxTokensPerAddress", premintConfig.tokenConfig.maxTokensPerAddress);
+        console.log("********************");
+
+        console.log("quantityToMint", quantityToMint);
+        console.log("defaultMintArguments.mintRecipient", defaultMintArguments.mintRecipient);
+        console.log("defaultMintArguments.mintComment", defaultMintArguments.mintComment);
+        console.log("firstMinter", firstMinter);
+        console.log("mockAA", address(mockAA));
 
         // when
         PremintResult memory premintResult = preminter.premint{value: mintCost}(

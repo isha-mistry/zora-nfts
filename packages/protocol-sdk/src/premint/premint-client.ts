@@ -882,7 +882,7 @@ export const buildPremintMintCall = ({
       BigInt(quantityToMint),
       mintArgumentsContract,
       firstMinterToSubmit,
-      zeroAddress,
+      collectionOrEmpty.contractAdmin,
     ],
   });
 };

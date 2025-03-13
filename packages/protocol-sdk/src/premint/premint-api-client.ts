@@ -139,7 +139,39 @@ export const getSignature = async ({
   //   ),
   // );
 
-  return convertGetPremintApiResponse(result);
+  const dummyPremintApiResponse: PremintFromApi = {
+    collection: {
+      additionalAdmins: [] as Address[],
+      contractAdmin: "0xB351a70dD6E5282A8c84edCbCd5A955469b9b032" as Address,
+      contractName: "Testing meeting 4",
+      contractURI: "ipfs://bafkreifvk2zol6q5mvgysfwdcuvvm7aupaddqxxodrnvsuc3xh3kflk77m"
+    },
+    collectionAddress: collectionAddress,
+    signature: "0xc92804f3f136f4e3199593b91cbfa7c4c7bac34523e21e128a03660e3f15e204413d773d12902d2930404814abca2372a6f5fb1b65aaf7343a7da9fba12c1afb1b" as Hex,
+    signer: "" as Address,
+    premint: {
+      premintConfigVersion: PremintConfigVersion.V2,
+      premintConfig:{
+        deleted: false,
+        uid: 1,
+        version: 2,
+        tokenConfig: {
+          tokenURI: "ipfs://bafkreihjxutxq64vrd6yankodg7na53wslqxh4hlrxeukvobur7ps3e6de",
+          maxSupply: BigInt(18446744073709551615),
+          royaltyBPS: 1000,
+          mintStart: BigInt(0),
+          payoutRecipient: "0xB351a70dD6E5282A8c84edCbCd5A955469b9b032" as Address,
+          createReferral: "0x0000000000000000000000000000000000000000" as Address,
+          fixedPriceMinter: "0x227d5294B13EBC893E31494194532727A130Ed4B" as Address,
+          pricePerToken: BigInt(0),
+          mintDuration: BigInt(0),
+          maxTokensPerAddress: BigInt(0),
+        }
+      }
+    }
+  };
+
+  return dummyPremintApiResponse;
 };
 
 const getOfCollection = async ({

@@ -2,6 +2,7 @@
 pragma solidity 0.8.17;
 
 import "forge-std/Test.sol";
+import "forge-std/console2.sol";
 import {Zora1155FactoryFixtures} from "../fixtures/Zora1155FactoryFixtures.sol";
 import {Zora1155PremintFixtures} from "../fixtures/Zora1155PremintFixtures.sol";
 import {ZoraCreator1155FactoryImpl} from "../../src/factory/ZoraCreator1155FactoryImpl.sol";
@@ -76,7 +77,9 @@ contract Zora1155PremintExecutorProxyTest is Test, IHasContractName {
 
         // now interface with proxy preminter - sign and execute the premint
         ContractCreationConfig memory contractConfig = Zora1155PremintFixtures.makeDefaultContractCreationConfig(creator);
+        console2.log("preminter proxy: ", address(preminterAtProxy));
         address deterministicAddress = preminterAtProxy.getContractAddress(contractConfig);
+        console.log("deterministicAddress: ", deterministicAddress);
 
         // sign the premint
         bytes memory signature = _signPremint(ZoraCreator1155Attribution.hashPremint(premintConfig), PremintEncoding.HASHED_VERSION_2, deterministicAddress);
@@ -86,6 +89,22 @@ contract Zora1155PremintExecutorProxyTest is Test, IHasContractName {
         // execute the premint
         vm.deal(collector, mintFeeAmount);
         vm.prank(collector);
+
+        console.log("contractConfig.contractAdmin: ", contractConfig.contractAdmin);
+        console.log("contractConfig.contractURI: ", contractConfig.contractURI);
+        console.log("contractConfig.contractName: ", contractConfig.contractName);
+        console.log("premintConfig.uid: ", premintConfig.uid);
+        console.log("premintConfig.version: ", premintConfig.version);
+        console.log("premintConfig.deleted: ", premintConfig.deleted);
+        console2.logBytes(signature);
+        console.log("quantityToMint: ", quantityToMint);
+        console.log("defaultMintArguments.mintRecipient: ", defaultMintArguments.mintRecipient);
+        console.log("defaultMintArguments.mintComment: ", defaultMintArguments.mintComment);
+        console.log("deterministicAddress: ", deterministicAddress);
+        console.log("creator: ", creator);
+        console.log("mintFeeAmount: ", mintFeeAmount);
+        
+
         uint256 tokenId = preminterAtProxy
         .premintV2{value: mintFeeAmount}(contractConfig, premintConfig, signature, quantityToMint, defaultMintArguments).tokenId;
 

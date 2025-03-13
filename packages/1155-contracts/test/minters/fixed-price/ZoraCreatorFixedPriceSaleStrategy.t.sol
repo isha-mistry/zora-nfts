@@ -306,7 +306,7 @@ contract ZoraCreatorFixedPriceSaleStrategyTest is Test {
         target.mint{value: totalValue}(fixedPrice, newTokenId, numTokens, rewardsRecipients, abi.encode(tokenRecipient, ""));
     }
 
-    function testFail_setupMint() external {
+    function test_RevertWhen_InsufficientFundsForMint() external {
         vm.startPrank(admin);
         uint256 newTokenId = target.setupNewToken("https://zora.co/testing/token.json", 10);
         target.addPermission(newTokenId, address(fixedPrice), target.PERMISSION_BIT_MINTER());
@@ -330,10 +330,12 @@ contract ZoraCreatorFixedPriceSaleStrategyTest is Test {
         vm.deal(tokenRecipient, 20 ether);
 
         vm.startPrank(tokenRecipient);
+        vm.expectRevert(abi.encodeWithSignature("WrongValueSent()"));
+
         target.mint{value: 10 ether}(fixedPrice, newTokenId, 10, rewardsRecipients, abi.encode(tokenRecipient));
 
-        assertEq(target.balanceOf(tokenRecipient, newTokenId), 10);
-        assertEq(address(target).balance, 10 ether);
+        // assertEq(target.balanceOf(tokenRecipient, newTokenId), 10);
+        // assertEq(address(target).balance, 10 ether);
 
         vm.stopPrank();
     }
